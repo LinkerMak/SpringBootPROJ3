@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,6 +44,15 @@ public class BookDAOImpl implements BookDAO{
     }
 
     @Override
+    public List<Book> getAllFreeBooks() {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Book> query = session.createQuery("from Book where status = false",Book.class);
+
+        return query.getResultList();
+    }
+
+    @Override
     @Transactional
     public Book getBook(int id) {
         Session session = entityManager.unwrap(Session.class);
@@ -60,5 +70,18 @@ public class BookDAOImpl implements BookDAO{
         Query<Book> query = session.createQuery("delete from Book where id =:ID");
         query.setParameter("ID",id);
         query.executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public List<Book> getAllBooksByIds(List<Integer> ids) {
+        Session session = entityManager.unwrap(Session.class);
+
+        List<Book> books = new ArrayList<>();
+        for(int id: ids) {
+            books.add(session.get(Book.class,id));
+        }
+
+        return books;
     }
 }

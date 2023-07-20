@@ -2,6 +2,9 @@ package com.example.springbootproj.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "readers", schema = "public")
 public class Reader {
@@ -20,12 +23,26 @@ public class Reader {
     @Column(name = "number")
     private String number;
 
-    public Reader() {}
+  /*  @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "form",
+            joinColumns = {@JoinColumn(name = "id_reader"),
+                    @JoinColumn(name="id_book")})
+    private Set<Book> books = new HashSet<Book>();
+
+   */ public Reader() {}
     public Reader(String name, String email, String number) {
         this.name = name;
         this.email = email;
         this.number = number;
     }
+
+   /* public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }*/
 
     public int getId() {
         return id;

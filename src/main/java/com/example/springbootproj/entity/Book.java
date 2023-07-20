@@ -27,7 +27,13 @@ public class Book {
     private boolean status;
 
     public Book() {}
-
+    public Book(Book book,boolean status) {
+        this.author = book.author;
+        this.name = book.name;
+        this.pages = book.pages;
+        this.price = book.price;
+        this.status = status;
+    }
     public Book(String author, String name, int pages, int price, boolean status) {
         this.author = author;
         this.name = name;

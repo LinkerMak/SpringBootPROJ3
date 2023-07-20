@@ -12,5 +12,8 @@
 </head>
 <body>
 
+<input type="button" value="Книги"
+       onclick="window.location.href= 'allBooks'"/>
+<br><br>
 </body>
 </html>

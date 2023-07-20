@@ -3,8 +3,10 @@ package com.example.springbootproj.controller;
 
 import com.example.springbootproj.dao.ArchiveDAO;
 import com.example.springbootproj.entity.Book;
+import com.example.springbootproj.entity.Form1;
 import com.example.springbootproj.entity.Reader;
 import com.example.springbootproj.service.BookService;
+import com.example.springbootproj.service.Form1Service;
 import com.example.springbootproj.service.ReaderService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 public class MyController {
 
+    @Autowired
+    private Form1Service form1Service;
     @Autowired
     private ArchiveDAO archiveDAO;
     @Autowired
@@ -134,5 +139,68 @@ public class MyController {
     public String showArchive(Model model) {
 
         return "allArchive";
+    }
+
+
+    @RequestMapping("/showBooksReaderById")
+    public String showBooksByReaderId(@RequestParam("readerId")int id, Model model) {
+
+        List<Integer> booksIds = form1Service.getIdsByReader(id);
+        List<Book> books = bookService.getAllBooksByIds(booksIds);
+        Reader reader = readerService.getReader(id);
+
+        model.addAttribute("books",books);
+        model.addAttribute("reader",reader);
+        return "allBooksById";
+    }
+
+    @RequestMapping("/addNewBookForReader")
+    public String addNewBookForReader(@RequestParam("readerId") int id,Model model) {
+
+        List<Book> books = bookService.getAllFreeBooks();
+
+        model.addAttribute("books",books);
+        model.addAttribute("readerId", id);
+        return "booksToChoose";
+    }
+
+    @RequestMapping("/chooseBook")
+    public String chooseBook(@RequestParam("bookId") int id,@RequestParam("readerId") int rid, Model model) {
+
+        Book book = bookService.getBook(id);
+        Reader reader = readerService.getReader(rid);
+
+        bookService.saveBook(new Book(book,true));
+        form1Service.addNewBookForReader(book, reader);
+
+        return "redirect:/showBooksReaderById?readerId=" + rid;
+    }
+
+    @RequestMapping("/returnBook")
+    public String returnBook(@RequestParam("bookId")int bId,@RequestParam("readerId") int rId, Model model) {
+
+        Book book = bookService.getBook(bId);
+        Reader reader = readerService.getReader(rId);
+
+        bookService.saveBook(new Book(book,false));
+        Form1 form = form1Service.getForm(book,reader);
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate formDate = LocalDate.parse(form.getDate_return());
+        int merge = currentDate.getDayOfYear() - formDate.getDayOfYear();
+
+        if (merge <= 30)  {
+            form1Service.deleteBookForReader(form);
+            String url = "redirect:/showBooksReaderById/readerId=" + rId;
+            return url;
+        }
+        else {
+            int sum = merge * 30;
+
+            model.addAttribute("sum", sum);
+            model.addAttribute("readerId",rId);
+            return "payment";
+        }
+
     }
 }

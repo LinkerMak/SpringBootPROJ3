@@ -19,6 +19,13 @@ public class BookServiceImpl implements BookService{
     public List<Book> getAllBooks() {
         return bookDAO.getAllBooks();
     }
+
+    @Override
+    @Transactional
+    public List<Book> getAllFreeBooks() {
+        return bookDAO.getAllFreeBooks();
+    }
+
     @Override
     @Transactional
     public void saveBook(Book book) {
@@ -32,7 +39,15 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
+    @Transactional
     public void deleteBook(int id) {
         bookDAO.deleteBook(id);
+    }
+
+
+    @Override
+    @Transactional
+    public List<Book> getAllBooksByIds(List<Integer> ids) {
+        return bookDAO.getAllBooksByIds(ids);
     }
 }

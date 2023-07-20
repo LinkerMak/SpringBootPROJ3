@@ -7,7 +7,7 @@
 <body>
 
 <h2>
-    All Books
+    All Readers
 </h2>
 
 
@@ -32,6 +32,10 @@
             <c:param name="readerId" value="${reader.id}"/>
         </c:url>
 
+        <c:url var="showBooksByIdReader" value="showBooksReaderById">
+            <c:param name="readerId" value="${reader.id}"/>
+        </c:url>
+
         <tr>
             <td>${reader.name}</td>
             <td>${reader.email}</td>
@@ -51,6 +55,13 @@
                        onClick="window.location.href = '${shoInformationButton}'">
             </td>
 
+            <td>
+                <input type="button" value="Книги"
+                       onClick="window.location.href = '${showBooksByIdReader}'">
+            </td>
+
+
+
         </tr>
     </c:forEach>
 </table>
@@ -60,5 +71,10 @@
 <input type="button" value="Добавить"
        onclick="window.location.href= 'addNewReader'"/>
 <br><br>
+
+<input type="button" value="Книги"
+       onclick="window.location.href= 'allBooks'"/>
+<br><br>
+
 </body>
 </html>
