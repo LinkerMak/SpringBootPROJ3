@@ -50,4 +50,10 @@ public class BookServiceImpl implements BookService{
     public List<Book> getAllBooksByIds(List<Integer> ids) {
         return bookDAO.getAllBooksByIds(ids);
     }
+
+    @Override
+    @Transactional
+    public boolean isExists(int id) {
+        return bookDAO.isExists(id);
+    }
 }

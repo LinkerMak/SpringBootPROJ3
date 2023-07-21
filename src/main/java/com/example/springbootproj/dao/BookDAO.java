@@ -18,4 +18,6 @@ public interface BookDAO {
 
     public void deleteBook(int id);
     public List<Book> getAllBooksByIds(List<Integer> ids);
+
+    public boolean isExists(int id);
 }

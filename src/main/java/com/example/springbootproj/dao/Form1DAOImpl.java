@@ -22,6 +22,7 @@ public class Form1DAOImpl implements Form1DAO{
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public Form1 getForm(Book book, Reader reader) {
         Session session = entityManager.unwrap(Session.class);
 
@@ -38,7 +39,7 @@ public class Form1DAOImpl implements Form1DAO{
 
         Session session = entityManager.unwrap(Session.class);
 
-        Query<Integer> query = session.createQuery("select book_id from Form1 where id =:ID",Integer.class);
+        Query<Integer> query = session.createQuery("select book_id from Form1 where reader_id =:ID",Integer.class);
         query.setParameter("ID",id);
         query.list();
 
@@ -53,7 +54,6 @@ public class Form1DAOImpl implements Form1DAO{
         Query<Form1> query = session.createQuery("delete from Form1 where id = :Id");
         query.setParameter("Id",form.getId());
         query.executeUpdate();
-
 
     }
 

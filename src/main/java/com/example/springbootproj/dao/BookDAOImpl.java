@@ -44,6 +44,7 @@ public class BookDAOImpl implements BookDAO{
     }
 
     @Override
+    @Transactional
     public List<Book> getAllFreeBooks() {
         Session session = entityManager.unwrap(Session.class);
 
@@ -84,4 +85,16 @@ public class BookDAOImpl implements BookDAO{
 
         return books;
     }
+
+    @Override
+    public boolean isExists(int id) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Boolean> query = session.createQuery("select exists (from Book where id = :ID)",Boolean.class);
+        query.setParameter("ID",id);
+
+        return query.getResultList().get(0);
+    }
+
+
 }

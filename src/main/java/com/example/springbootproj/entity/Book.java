@@ -28,6 +28,7 @@ public class Book {
 
     public Book() {}
     public Book(Book book,boolean status) {
+        this.id = book.id;
         this.author = book.author;
         this.name = book.name;
         this.pages = book.pages;
@@ -93,7 +94,8 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "author='" + author + '\'' +
+                "id=" + id +
+                ", author='" + author + '\'' +
                 ", name='" + name + '\'' +
                 ", pages=" + pages +
                 ", price=" + price +

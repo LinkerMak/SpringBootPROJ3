@@ -16,26 +16,32 @@
     <th>Author</th>
     <th>pages</th>
     <th>price</th>
-    <th>status</th>
+    <th> Date Take</th>
+    <th> Date Return</th>
+    <th> Date Fact Return</th>
+    <th>Merge</th>
   </tr>
 
-  <c:forEach var="book" items="${books}">
+  <c:forEach var="buf" items="${forms}">
 
-    <c:url var="returnBook" value="returnBook">
-      <c:param name="bookId" value="${book.id}"/>
+    <c:url var="returnBook" value="/returnBook">
+      <c:param name="bookId" value="${buf.book.id}"/>
       <c:param name="readerId" value="${reader.id}"/>
     </c:url>
 
     <tr>
-      <td>${book.name}</td>
-      <td>${book.author}</td>
-      <td>${book.pages}</td>
-      <td>${book.price}</td>
-      <td>${book.status}</td>
+      <td>${buf.book.name}</td>
+      <td>${buf.book.author}</td>
+      <td>${buf.book.pages}</td>
+      <td>${buf.book.price}</td>
+      <td>${buf.form.date_take}</td>
+      <td>${buf.form.date_return}</td>
+      <td>${buf.form.date_fact_return}</td>
+      <td>${buf.form.merge}</td>
 
       <td>
-      <input type="button" value="Вернуть"
-             onclick="window.location.href= 'returnBook'"/>
+        <input type="button" value="Вернуть"
+               onClick="window.location.href = '${returnBook}'">
       </td>
     </tr>
   </c:forEach>

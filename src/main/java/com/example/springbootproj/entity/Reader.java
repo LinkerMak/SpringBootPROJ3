@@ -30,6 +30,13 @@ public class Reader {
     private Set<Book> books = new HashSet<Book>();
 
    */ public Reader() {}
+
+    public Reader(ArchiveReaders arReader) {
+       this.email = arReader.getEmail();
+       this.number = arReader.getNumber();
+       this.name = arReader.getName();
+       this.id =arReader.getId_reader();
+    }
     public Reader(String name, String email, String number) {
         this.name = name;
         this.email = email;

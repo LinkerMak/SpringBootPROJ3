@@ -16,4 +16,6 @@ public interface BookService {
     public void deleteBook(int id);
 
     public List<Book> getAllBooksByIds(List<Integer> ids);
+
+    public boolean isExists(int id);
 }

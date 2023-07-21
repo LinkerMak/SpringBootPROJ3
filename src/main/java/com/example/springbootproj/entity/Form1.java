@@ -26,7 +26,6 @@ public class Form1 {
     private String date_fact_return;
     @Column(name = "count")
     private int count;
-
     @Column(name = "merge")
     private int merge;
     public Form1() {}
@@ -103,5 +102,19 @@ public class Form1 {
 
     public void setMerge(int merge) {
         this.merge = merge;
+    }
+
+    @Override
+    public String toString() {
+        return "Form1{" +
+                "id=" + id +
+                ", reader_id=" + reader_id +
+                ", book_id=" + book_id +
+                ", date_take='" + date_take + '\'' +
+                ", date_return='" + date_return + '\'' +
+                ", date_fact_return='" + date_fact_return + '\'' +
+                ", count=" + count +
+                ", merge=" + merge +
+                '}';
     }
 }
