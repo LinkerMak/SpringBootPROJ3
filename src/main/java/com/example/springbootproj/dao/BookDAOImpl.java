@@ -87,11 +87,22 @@ public class BookDAOImpl implements BookDAO{
     }
 
     @Override
+    @Transactional
     public boolean isExists(int id) {
         Session session = entityManager.unwrap(Session.class);
 
         Query<Boolean> query = session.createQuery("select exists (from Book where id = :ID)",Boolean.class);
         query.setParameter("ID",id);
+
+        return query.getResultList().get(0);
+    }
+
+    @Override
+    @Transactional
+    public Integer getBookMaxId() {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Integer> query = session.createQuery("select max(id) from Book",Integer.class);
 
         return query.getResultList().get(0);
     }

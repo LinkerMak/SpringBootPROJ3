@@ -5,6 +5,7 @@ public class ArchiveBookReader {
     private ArchiveReaders reader;
     private ArchiveBooks book;
 
+    public ArchiveBookReader() {};
     public ArchiveBookReader(ArchiveReaders reader, ArchiveBooks book) {
         this.reader = reader;
         this.book = book;

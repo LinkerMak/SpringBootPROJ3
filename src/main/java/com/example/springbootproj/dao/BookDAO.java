@@ -4,6 +4,7 @@ package com.example.springbootproj.dao;
 import com.example.springbootproj.entity.Book;
 import com.example.springbootproj.entity.Form1;
 import com.example.springbootproj.entity.Reader;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface BookDAO {
     public List<Book> getAllBooksByIds(List<Integer> ids);
 
     public boolean isExists(int id);
+    public Integer getBookMaxId();
 }

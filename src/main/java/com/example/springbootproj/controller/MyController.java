@@ -57,11 +57,14 @@ public class MyController {
         System.out.println(book);
         System.out.println(bookService.isExists(book.getId()));
         if (bookService.isExists(book.getId()) == false) {
-            archiveBooksDAO.addBookInArchive(book);
+            bookService.saveBook(book);
+            Book bookMax = bookService.getBook(bookService.getBookMaxId());
+            archiveBooksDAO.addBookInArchive(bookMax);
 
         }
-        bookService.saveBook(book);
-
+        else {
+            bookService.saveBook(book);
+        }
         return "redirect:/allBooks";
     }
 
@@ -169,17 +172,24 @@ public class MyController {
     }
 
     @RequestMapping("showBooksByIdReaderArchive")
-    public String showBooksByIdReaderArchive(@RequestParam("reader") ArchiveReaders readerAr, Model model) {
+    public String showBooksByIdReaderArchive(@RequestParam("readerID") int id, Model model) {
 
-        List<ArchiveReaders> archiveReaders = archiveReadersDAO.getAllBooksByReaderId(readerAr.getId_reader());
+        System.out.println("000000000000000000");
+        System.out.println(id);
+        List<ArchiveReaders> archiveReaders = archiveReadersDAO.getAllBooksByReaderId(id);
 
-        System.out.println(archiveReaders);
+        System.out.println(":" + archiveReaders);
         List<ArchiveBookReader> archiveBooksReaders = new ArrayList<>();
+        int i = 0;
         for(ArchiveReaders reader : archiveReaders) {
             archiveBooksReaders.add(new ArchiveBookReader(reader,archiveBooksDAO.getBookById(reader.getId_book())));
-            System.out.println("00000000000000");;
+            System.out.print("*" + archiveBooksReaders.get(i).getReader());
+            System.out.print(":");
+            System.out.println(archiveBooksReaders.get(i).getBook());
+
         }
 
+        System.out.println(archiveBooksReaders);
         model.addAttribute("arReadersBooks", archiveBooksReaders);
         return "allBooksByReaderArchive";
     }
@@ -261,4 +271,27 @@ public class MyController {
         }
 
     }
+
+    @RequestMapping("/showTextInfo")
+    public String testInfo(Model model) {
+        List<Reader> readers = readerService.getAllReaders();
+        List<ReadersTask> rTasks = new ArrayList<>();
+        for(Reader reader : readers) {
+            rTasks.add(new ReadersTask(reader,false));
+        }
+        model.addAttribute("rTasks", rTasks);
+
+        return "textInfo";
+    }
+
+    @RequestMapping("/addToTask")
+    public String addToTask(@RequestParam("rTasks")List<ReadersTask> readersTasks, Model model) {
+
+        for(ReadersTask rt : readersTasks) {
+            System.out.println(rt.getReader() + ":" + rt.getFlag());
+        }
+
+        return "redirect:/allBooks";
+    }
+
 }

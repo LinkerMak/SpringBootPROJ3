@@ -67,4 +67,17 @@ public class Form1DAOImpl implements Form1DAO{
 
         session.saveOrUpdate(form1);
     }
+
+    @Override
+    @Transactional
+    public List<Form1> getOverdueForms() {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Form1> query = session.createQuery("from Form1 where date_fact_return =:CHAR and date_return <:DATE", Form1.class);
+        query.setParameter("CHAR","-");
+        LocalDate currentDate = LocalDate.now();
+        query.setParameter("DATA",currentDate.toString());
+
+        return query.getResultList();
+    }
 }

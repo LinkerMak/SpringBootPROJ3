@@ -65,14 +65,17 @@
 
 <input type="button" value="Читатели"
        onclick="window.location.href= 'readers'"/>
+<br><br>
 
 <input type="button" value="Архив книг"
        onclick="window.location.href= 'showArchiveBooks'"/>
-<br><br>
 
 <input type="button" value="Архив читателей"
        onclick="window.location.href= 'showArchiveReaders'"/>
 <br><br>
 
+<input type="button" value="Выгрузка отчета"
+       onclick="window.location.href= 'showTextInfo'"/>
+<br><br>
 </body>
 </html>

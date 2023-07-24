@@ -43,6 +43,8 @@ public class ArchiveBooksDAO {
 
         Session session = entityManager.unwrap(Session.class);
 
-        return session.get(ArchiveBooks.class,id);
+        Query<ArchiveBooks> query= session.createQuery("from ArchiveBooks where id_book =:ID", ArchiveBooks.class);
+        query.setParameter("ID",id);
+        return query.getResultList().get(0);
     }
 }

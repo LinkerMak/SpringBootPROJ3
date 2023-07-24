@@ -3,6 +3,7 @@ package com.example.springbootproj.dao;
 import com.example.springbootproj.entity.Book;
 import com.example.springbootproj.entity.Form1;
 import com.example.springbootproj.entity.Reader;
+import com.example.springbootproj.service.Form1ServiceImpl;
 
 import java.util.List;
 
@@ -14,4 +15,7 @@ public interface Form1DAO {
     public void deleteBookForReader(Form1 form);
 
     public void addNewBookForReader(Book book, Reader reader);
+
+    public List<Form1> getOverdueForms();
+
 }

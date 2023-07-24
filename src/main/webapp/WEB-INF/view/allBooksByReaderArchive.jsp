@@ -6,7 +6,7 @@
 <body>
 
 <h2>
-  Читатель ${arReadersBooks.reader.reader.name} брал следующие книги:
+  Читатель ${arReadersBooks[0].reader.name} брал следующие книги:
 </h2>
 
 

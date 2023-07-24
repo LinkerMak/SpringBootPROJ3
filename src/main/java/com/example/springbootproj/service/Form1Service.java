@@ -11,4 +11,6 @@ public interface Form1Service {
     public void deleteBookForReader(Form1 form);
     public void addNewBookForReader(Book book, Reader reader);
     public Form1 getForm(Book book, Reader reader);
+
+    public List<Form1> getOverdueForms();
 }

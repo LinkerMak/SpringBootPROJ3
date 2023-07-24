@@ -20,7 +20,7 @@
   <c:forEach var="reader" items="${arReaders}">
 
     <c:url var="showBooksByIdReaderArchive" value="showBooksByIdReaderArchive">
-      <c:param name="reader" value="${reader}"/>
+      <c:param name="readerID" value="${reader.id_reader}"/>
     </c:url>
 
     <tr>

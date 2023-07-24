@@ -56,4 +56,10 @@ public class BookServiceImpl implements BookService{
     public boolean isExists(int id) {
         return bookDAO.isExists(id);
     }
+
+    @Override
+    @Transactional
+    public Integer getBookMaxId() {
+        return bookDAO.getBookMaxId();
+    }
 }
