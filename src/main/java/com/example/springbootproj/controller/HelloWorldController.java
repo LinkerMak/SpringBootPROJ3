@@ -1,20 +1,21 @@
 package com.example.springbootproj.controller;
 
+import com.example.springbootproj.entity.ReadersTask;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/")
+import java.util.Date;
+import java.util.List;
+
+@RestController
 public class HelloWorldController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String helloWorld(ModelMap model, HttpServletRequest request) {
-        String message = "Hello World, Spring 3.0!";
-        System.out.println(message);
-        model.addAttribute("message", message);
-        return "hello";
-    }
+
+
 }

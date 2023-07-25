@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -54,7 +55,18 @@ public class ArchiveReadersDAO {
         Query<ArchiveReaders> arReaders = session.createQuery("from ArchiveReaders where id_reader = :ID",ArchiveReaders.class);
         arReaders.setParameter("ID",id);
 
-        System.out.println("####################");
+        return arReaders.getResultList();
+    }
+
+    @Transactional
+    public List<ArchiveReaders> getAllBooksByReaderId(int id, String dateFrom, String dateTo) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<ArchiveReaders> arReaders = session.createQuery("from ArchiveReaders where id_reader = :ID and CAST(date_take AS date) >= CAST(:DATE_FROM AS date) and CAST(date_return AS date) <= CAST(:DATE_TO AS date) ",ArchiveReaders.class);
+        arReaders.setParameter("ID",id);
+        arReaders.setParameter("DATE_FROM",dateFrom);
+        arReaders.setParameter("DATE_TO",dateTo);
+
         return arReaders.getResultList();
     }
 }

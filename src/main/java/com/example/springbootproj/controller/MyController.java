@@ -3,10 +3,12 @@ package com.example.springbootproj.controller;
 
 import com.example.springbootproj.dao.ArchiveBooksDAO;
 import com.example.springbootproj.dao.ArchiveReadersDAO;
+import com.example.springbootproj.dao.TaskDAO;
 import com.example.springbootproj.entity.*;
 import com.example.springbootproj.service.BookService;
 import com.example.springbootproj.service.Form1Service;
 import com.example.springbootproj.service.ReaderService;
+import com.example.springbootproj.utils.TaskStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class MyController {
@@ -32,6 +33,8 @@ public class MyController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private TaskDAO taskDAO;
     @Autowired
     private ReaderService readerService;
 
@@ -277,21 +280,78 @@ public class MyController {
         List<Reader> readers = readerService.getAllReaders();
         List<ReadersTask> rTasks = new ArrayList<>();
         for(Reader reader : readers) {
-            rTasks.add(new ReadersTask(reader,false));
+            rTasks.add(new ReadersTask(reader));
         }
         model.addAttribute("rTasks", rTasks);
-
-        return "textInfo";
+        return "readersByReport";
     }
 
-    @RequestMapping("/addToTask")
-    public String addToTask(@RequestParam("rTasks")List<ReadersTask> readersTasks, Model model) {
 
-        for(ReadersTask rt : readersTasks) {
+    /*@InitBinder
+    public void initBinder(WebDataBinder binder) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss Z");
+        dateFormat.setLenient(false);
+        *//*for(ReadersTask rt : readersTasks) {
             System.out.println(rt.getReader() + ":" + rt.getFlag());
-        }
+        }*//*
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,true));
+    }*/
 
+    @RequestMapping("/taskInfo")
+    public String taskInfo(@RequestParam("readerId") int id_reader, Model model) {
+        Task task = new Task(id_reader, TaskStatus.CREATED.toString());
+
+        model.addAttribute("task",task);
+        return "taskInfo";
+    }
+    @RequestMapping("/addToTask")
+    public String addToTask(@ModelAttribute("task") Task tusk)  {
+
+        /*char [] arr = str.toCharArray();
+        System.out.println(arr);
+        int counter_spaces = 0;
+        for(int i = 0; i < arr.length; i++) {
+
+            if(arr[i] == ' ') counter_spaces +=1;
+
+            if (arr[i] == ' ' && counter_spaces == 1) {
+                switch(arr[i+1]){
+                    case 'J': month = 7;
+                    break;
+                }
+                continue;
+            }
+
+            if(arr[i] == ' '  && counter_spaces == 2 ) {
+                int c = i + 1;
+                String st = "";
+                while(arr[c] != ' ') {
+                    st += arr[c];
+                    c++;
+                }
+                day = Integer.parseInt(st);
+                continue;
+            }
+
+            if(arr[i] == ' ' && counter_spaces == 5) {
+                int c = i + 1;
+                StringBuilder st = new StringBuilder();
+                while(st.length() != 4) {
+                    st.append(arr[c]);
+                    c++;
+                }
+                year = Integer.parseInt(st.toString());
+            }
+        }*/
+        taskDAO.saveTask(tusk);
         return "redirect:/allBooks";
     }
-
+    @RequestMapping("/test")
+    public void test(int id_reader) {
+        List<Form1> forms = form1Service.getOverdueForms(id_reader);
+        for(Form1 form : forms) {
+            System.out.println(form);
+        }
+    }
 }

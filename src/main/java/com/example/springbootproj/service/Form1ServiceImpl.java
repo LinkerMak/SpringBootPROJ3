@@ -40,7 +40,19 @@ public class Form1ServiceImpl implements Form1Service{
 
     @Override
     @Transactional
-    public List<Form1> getOverdueForms() {
-        return form1DAO.getOverdueForms();
+    public List<Form1> getOverdueForms(int id_reader) {
+        return form1DAO.getOverdueForms(id_reader);
+    }
+
+    @Override
+    @Transactional
+    public List<Form1> getAllFormsByReaderId(int id) {
+        return form1DAO.getAllFormsByReaderId(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Form1> getAllFormsByReaderId(int id,String dateFrom,String dateTo) {
+        return form1DAO.getAllFormsByReaderId(id,dateFrom,dateTo);
     }
 }

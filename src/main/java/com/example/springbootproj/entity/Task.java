@@ -29,11 +29,9 @@ public class Task implements Serializable {
     private String dateTo;
 
     public Task() {}
-    public Task(int id_reader, String status, String dateFrom, String dateTo) {
+    public Task(int id_reader, String status) {
         this.id_reader = id_reader;
         this.status = status;
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
     }
 
     public int getId() {
@@ -74,5 +72,16 @@ public class Task implements Serializable {
 
     public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", id_reader=" + id_reader +
+                ", status='" + status + '\'' +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                '}';
     }
 }

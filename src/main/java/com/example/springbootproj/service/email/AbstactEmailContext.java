@@ -10,5 +10,5 @@ public abstract class AbstactEmailContext {
     private String emailLanguage;
     private String displayName;
     private String templateLocation;
-    private Map <String, Object> context;
+  //  private Map <String, Object> context;
 }

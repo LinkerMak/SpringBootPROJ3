@@ -12,5 +12,8 @@ public interface Form1Service {
     public void addNewBookForReader(Book book, Reader reader);
     public Form1 getForm(Book book, Reader reader);
 
-    public List<Form1> getOverdueForms();
+    public List<Form1> getOverdueForms(int id_reader);
+    public List<Form1> getAllFormsByReaderId(int id);
+
+    public List<Form1> getAllFormsByReaderId(int id,String dateFrom,String dateTo);
 }

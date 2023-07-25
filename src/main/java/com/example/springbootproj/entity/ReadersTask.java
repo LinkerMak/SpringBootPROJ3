@@ -5,13 +5,13 @@ import java.util.List;
 public class ReadersTask {
 
     private Reader reader;
-    boolean flag;
+    private String date_to;
 
-    public ReadersTask(Reader reader, boolean flag) {
+    private String date_from;
+
+    public ReadersTask(Reader reader) {
         this.reader = reader;
-        this.flag = flag;
     }
-
     public Reader getReader() {
         return reader;
     }
@@ -20,15 +20,20 @@ public class ReadersTask {
         this.reader = reader;
     }
 
-    public boolean getFlag() {
-        return flag;
+    public String getDate_to() {
+        return date_to;
     }
 
-    public void setFlag(boolean flag) {
-        if (this.flag == false) {
-            this.flag = true;
-        }
-        else flag = false;
+    public void setDate_to(String date_to) {
+        this.date_to = date_to;
+    }
+
+    public String getDate_from() {
+        return date_from;
+    }
+
+    public void setDate_from(String date_from) {
+        this.date_from = date_from;
     }
 }
 

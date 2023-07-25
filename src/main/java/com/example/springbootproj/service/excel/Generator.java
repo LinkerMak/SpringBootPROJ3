@@ -1,10 +1,11 @@
 package com.example.springbootproj.service.excel;
 
-import com.example.springbootproj.dao.ArchiveReadersDAO;
-import com.example.springbootproj.dao.Form1DAO;
-import com.example.springbootproj.dao.TaskDAO;
-import com.example.springbootproj.entity.Task;
+import com.example.springbootproj.dao.*;
+import com.example.springbootproj.entity.*;
 import com.example.springbootproj.service.excel.ReportExcelStreamWriter;
+import com.example.springbootproj.utils.ArchiveReaderBook;
+import com.example.springbootproj.utils.ReaderBook;
+import com.example.springbootproj.utils.ReaderBookForm;
 import com.example.springbootproj.utils.TaskStatus;
 import org.hibernate.StatelessSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -25,9 +28,18 @@ public class Generator {
     private Form1DAO form1DAO;
 
     @Autowired
+    private ReaderDAO readerDAO;
+
+    @Autowired
+    private BookDAO bookDAO;
+
+    @Autowired
+    private ArchiveBooksDAO archiveBooksDAO;
+
+    @Autowired
     private ArchiveReadersDAO archiveReadersDAO;
 
-    @Async("taskScheduler")
+    /*@Async("taskScheduler")
     @Scheduled(fixedDelay = 60000)
     public void scheduledTask() {
         System.out.println("scheduledTask is started");
@@ -38,7 +50,7 @@ public class Generator {
         }
         System.out.println("task found");
         generate(task);
-    }
+    }*/
 
     @Transactional
     public Task getTask() {
@@ -56,18 +68,31 @@ public class Generator {
     @Transactional
     public void generate(Task task) {
         System.out.println("generating report is started");
-        try (
-                StatelessSession statelessSession =
-        ) {
+        try{
+
+            List<Form1> forms = form1DAO.getAllFormsByReaderId(task.getId_reader(),task.getDateFrom(),task.getDateTo());
+            Reader reader = readerDAO.getReader(task.getId_reader());
+            List<ReaderBookForm> readerBookList = new ArrayList<>();
+            for(Form1 form : forms) {
+                readerBookList.add(new ReaderBookForm(reader,bookDAO.getBook(form.getBook_id()), form));
+            }
+
+            List<ArchiveReaders> arForms = archiveReadersDAO.getAllBooksByReaderId(task.getId_reader(),task.getDateFrom(),task.getDateTo());
+            List<ArchiveReaderBook> readerBookArchiveList = new ArrayList<>();
+
+            for(ArchiveReaders ar: arForms) {
+                    readerBookArchiveList.add(new ArchiveReaderBook(ar,bookDAO.getBook(ar.getId_book())));
+            }
 
 
             ReportExcelStreamWriter writer = new ReportExcelStreamWriter();
-            Query<MessageData> query = statelessSession.createNamedQuery(MESSAGE_REF_QUERY_NAME, MessageData.class);
+
+          /*  Query<MessageData> query = statelessSession.createNamedQuery(MESSAGE_REF_QUERY_NAME, MessageData.class);
             query.setParameter(1, task.getDateFrom());
             query.setParameter(2, task.getDateTo());
             query.setHint(JPA_SHARED_CACHE_STORE_MODE, null);
             query.setHint(JPA_SHARED_CACHE_RETRIEVE_MODE, null);
-            ScrollableResults results = query.scroll(ScrollMode.FORWARD_ONLY);
+            ScrollableResults results = query.scroll(ScrollMode.FORWARD_ONLY);*/
             int index = 0;
             while (results.next()) {
                 index++;
@@ -77,14 +102,14 @@ public class Generator {
                 }
             }
             writer.writeWorkbook();
-            task.setStatus(DONE.toString());
-            log.info("task {} complete", task);
+            task.setStatus(TaskStatus.DONE.toString());
+            System.out.println("task {} complete : " + task);
         } catch (Exception e) {
-            task.setStatus(FAIL.toString());
+            task.setStatus(TaskStatus.FAIL.toString());
             e.printStackTrace();
-            log.error("an error occurred with message {}. While executing the task {}", e.getMessage(), task);
+            System.out.println("an error occurred with message {}. While executing the task {}:" + e.getMessage() + " : " + task);
         } finally {
-            taskRepository.save(task);
+            taskDao.saveTask(task);
         }
     }
 }
