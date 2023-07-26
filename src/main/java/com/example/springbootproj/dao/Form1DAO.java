@@ -16,7 +16,7 @@ public interface Form1DAO {
 
     public void addNewBookForReader(Book book, Reader reader);
 
-    public List<Form1> getOverdueForms(int id_reader);
+    public List<Form1> getOverdueForms();
 
     public List<Form1> getAllFormsByReaderId(int id);
 

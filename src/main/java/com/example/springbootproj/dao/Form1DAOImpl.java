@@ -71,13 +71,13 @@ public class Form1DAOImpl implements Form1DAO{
 
     @Override
     @Transactional
-    public List<Form1> getOverdueForms(int id_reader) {
+    public List<Form1> getOverdueForms() {
         Session session = entityManager.unwrap(Session.class);
 
-        Query<Form1> query = session.createQuery("from Form1 where date_fact_return ='-' and CAST(date_return AS date) > CAST(:DAT AS date) and reader_id = :ID", Form1.class);
+        Query<Form1> query = session.createQuery("from Form1 where date_fact_return ='-' and CAST(date_return AS date) < CAST(:DAT AS date)", Form1.class);
         LocalDate currentDate = LocalDate.now();
         query.setParameter("DAT",currentDate.toString());
-        query.setParameter("ID",id_reader);
+
 
         return query.getResultList();
     }

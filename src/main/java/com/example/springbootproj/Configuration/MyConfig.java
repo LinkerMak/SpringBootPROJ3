@@ -28,4 +28,12 @@ public class MyConfig {
         scheduler.initialize();
         return scheduler;
     }
+
+    @Bean(name = "emailScheduler")
+    public TaskScheduler getEmailScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(CORE_POOL_SIZE);
+        scheduler.initialize();
+        return scheduler;
+    }
 }

@@ -40,4 +40,13 @@ public class ReaderBookForm {
     public void setForm1(Form1 form1) {
         this.form1 = form1;
     }
+
+    @Override
+    public String toString() {
+        return "ReaderBookForm{" +
+                "reader=" + reader +
+                ", book=" + book +
+                ", form1=" + form1 +
+                '}';
+    }
 }

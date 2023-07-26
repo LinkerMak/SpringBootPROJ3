@@ -30,5 +30,11 @@ public class ArchiveReaderBook {
         this.book = book;
     }
 
-
+    @Override
+    public String toString() {
+        return "ArchiveReaderBook{" +
+                "ar=" + ar +
+                ", book=" + book +
+                '}';
+    }
 }

@@ -26,6 +26,9 @@ public class TaskDAOImpl implements TaskDAO{
         Query<Task> query = session.createQuery("from Task where status =:STATUS",Task.class);
         query.setParameter("STATUS", TaskStatus.CREATED.toString());
 
+        if(query.getResultList().size() == 0) {
+            return null;
+        }
         return query.getResultList().get(0);
     }
 

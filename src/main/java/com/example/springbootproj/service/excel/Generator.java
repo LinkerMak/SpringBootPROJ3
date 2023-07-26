@@ -104,6 +104,16 @@ public class Generator {
                 }
             }*/
 
+            System.out.println(readerBookList.size());
+            System.out.println(readerBookArchiveList.size());
+
+            for(ReaderBookForm rbf : readerBookList) {
+                System.out.println(rbf);
+            }
+
+            for(ArchiveReaderBook arb : readerBookArchiveList) {
+                System.out.println(arb);
+            }
             int count = 0;
             while(count < readerBookList.size()) {
                 count++;

@@ -347,11 +347,11 @@ public class MyController {
         taskDAO.saveTask(tusk);
         return "redirect:/allBooks";
     }
-    @RequestMapping("/test")
+    /*@RequestMapping("/test")
     public void test(int id_reader) {
         List<Form1> forms = form1Service.getOverdueForms(id_reader);
         for(Form1 form : forms) {
             System.out.println(form);
         }
-    }
+    }*/
 }

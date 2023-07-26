@@ -35,8 +35,16 @@ public class ReportExcelStreamWriter {
         setCellValue(row.createCell(5), form.getDate_take());
         setCellValue(row.createCell(6), form.getDate_return());
         setCellValue(row.createCell(7), form.getDate_fact_return());
-        setCellValue(row.createCell(8), form.getCount());
-        setCellValue(row.createCell(9), form.getMerge());
+        LocalDate dateTake = LocalDate.parse(form.getDate_take());
+        LocalDate dateReturn = LocalDate.now();
+
+        int temp = 0;
+        int min = dateReturn.getDayOfYear() - dateTake.getDayOfYear();
+        if (min >= 30 ) {
+            temp = min - 30;
+        }
+        setCellValue(row.createCell(8), temp);
+        setCellValue(row.createCell(9), temp * 30);
     }
 
     public void createRow(int index, Book book, ArchiveReaders ar,Reader reader) {
@@ -57,7 +65,7 @@ public class ReportExcelStreamWriter {
             temp = dateFactRet.getDayOfYear() - dateRet.getDayOfYear();
         }
         setCellValue(row.createCell(8), temp);
-        setCellValue(row.createCell(9), ar.getMerge());
+        setCellValue(row.createCell(9), temp * 30);
     }
     public void writeWorkbook() throws IOException {
         FileOutputStream fileOut = new FileOutputStream("xlsxs/" + Instant.now().getEpochSecond() + ".xlsx");
