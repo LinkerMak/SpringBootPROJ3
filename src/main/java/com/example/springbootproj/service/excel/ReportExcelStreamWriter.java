@@ -1,5 +1,6 @@
 package com.example.springbootproj.service.excel;
 
+import com.example.springbootproj.entity.ArchiveReaders;
 import com.example.springbootproj.entity.Book;
 import com.example.springbootproj.entity.Form1;
 import com.example.springbootproj.entity.Reader;
@@ -11,6 +12,7 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDate;
 
 public class ReportExcelStreamWriter {
 
@@ -37,8 +39,28 @@ public class ReportExcelStreamWriter {
         setCellValue(row.createCell(9), form.getMerge());
     }
 
+    public void createRow(int index, Book book, ArchiveReaders ar,Reader reader) {
+        SXSSFRow row = sheet.createRow(index);
+        setCellValue(row.createCell(0), reader.getName());
+        setCellValue(row.createCell(1), reader.getEmail());
+        setCellValue(row.createCell(2), reader.getNumber());
+        setCellValue(row.createCell(3), book.getName());
+        setCellValue(row.createCell(4), book.getAuthor());
+        setCellValue(row.createCell(5), ar.getDate_take());
+        setCellValue(row.createCell(6), ar.getDate_return());
+        setCellValue(row.createCell(7), ar.getDate_fact_return());
+        LocalDate dateRet = LocalDate.parse(ar.getDate_return());
+        LocalDate dateFactRet = LocalDate.parse(ar.getDate_fact_return());
+
+        int temp = 0;
+        if (dateFactRet.getDayOfYear() > dateRet.getDayOfYear()) {
+            temp = dateFactRet.getDayOfYear() - dateRet.getDayOfYear();
+        }
+        setCellValue(row.createCell(8), temp);
+        setCellValue(row.createCell(9), ar.getMerge());
+    }
     public void writeWorkbook() throws IOException {
-        FileOutputStream fileOut = new FileOutputStream(Instant.now().getEpochSecond() + ".xlsx");
+        FileOutputStream fileOut = new FileOutputStream("xlsxs/" + Instant.now().getEpochSecond() + ".xlsx");
         wb.write(fileOut);
         fileOut.close();
     }

@@ -1,6 +1,7 @@
 package com.example.springbootproj.dao;
 
 import com.example.springbootproj.entity.Task;
+import com.example.springbootproj.utils.TaskStatus;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -21,8 +22,9 @@ public class TaskDAOImpl implements TaskDAO{
     public Task getTask() {
         Session session = entityManager.unwrap(Session.class);
 
+        System.out.println("((((((((((((((((((((((");
         Query<Task> query = session.createQuery("from Task where status =:STATUS",Task.class);
-        query.setParameter("STATUS","created");
+        query.setParameter("STATUS", TaskStatus.CREATED.toString());
 
         return query.getResultList().get(0);
     }
