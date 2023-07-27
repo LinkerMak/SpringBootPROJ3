@@ -1,6 +1,6 @@
 package com.example.springbootproj.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import org.bouncycastle.crypto.digests.GeneralDigest;
 
 import java.io.Serializable;

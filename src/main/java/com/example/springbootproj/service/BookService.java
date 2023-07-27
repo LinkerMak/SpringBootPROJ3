@@ -2,7 +2,7 @@ package com.example.springbootproj.service;
 
 
 import com.example.springbootproj.entity.Book;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import javax.persistence.*;
 
 import java.util.List;
 

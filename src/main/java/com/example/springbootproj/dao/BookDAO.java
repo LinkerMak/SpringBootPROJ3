@@ -4,7 +4,7 @@ package com.example.springbootproj.dao;
 import com.example.springbootproj.entity.Book;
 import com.example.springbootproj.entity.Form1;
 import com.example.springbootproj.entity.Reader;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import javax.persistence.*;
 
 import java.util.List;
 

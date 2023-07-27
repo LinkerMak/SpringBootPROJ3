@@ -1,6 +1,6 @@
 package com.example.springbootproj.entity.security;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;

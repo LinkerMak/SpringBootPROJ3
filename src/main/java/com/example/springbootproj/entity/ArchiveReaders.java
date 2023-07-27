@@ -1,6 +1,8 @@
 package com.example.springbootproj.entity;
 
-import jakarta.persistence.*;
+
+import javax.persistence.*;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "archive_readers", schema = "public")

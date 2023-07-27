@@ -2,13 +2,14 @@ package com.example.springbootproj.dao;
 
 import com.example.springbootproj.entity.Task;
 import com.example.springbootproj.utils.TaskStatus;
-import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 
 @Repository
 @EnableTransactionManagement

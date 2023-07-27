@@ -4,7 +4,7 @@ import com.example.springbootproj.entity.ArchiveReaders;
 import com.example.springbootproj.entity.Book;
 import com.example.springbootproj.entity.Form1;
 import com.example.springbootproj.entity.Reader;
-import jakarta.persistence.EntityManager;
+import javax.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

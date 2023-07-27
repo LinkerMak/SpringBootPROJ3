@@ -9,7 +9,6 @@ import com.example.springbootproj.service.BookService;
 import com.example.springbootproj.service.Form1Service;
 import com.example.springbootproj.service.ReaderService;
 import com.example.springbootproj.utils.TaskStatus;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -33,19 +33,22 @@ public class MyController {
     private ArchiveReadersDAO archiveReadersDAO;
     @Autowired
     private BookService bookService;
-
     @Autowired
     private TaskDAO taskDAO;
     @Autowired
     private ReaderService readerService;
 
-    @RequestMapping
+    @RequestMapping("/index")
     public String hello() {
-        return "index";
+        return "hello";
     }
     @PostMapping("/login")
     public String login() {
         return "login";
+    }
+    @RequestMapping("/registration")
+    public String reg() {
+        return "registration";
     }
     @RequestMapping("/allBooks")
     public String showAllBooks(Model model) {
@@ -90,7 +93,7 @@ public class MyController {
     }
 
     @RequestMapping("/showInformationBookById")
-    public String showBookInformation(@RequestParam("bookId") int id,Model model,HttpServletRequest request) {
+    public String showBookInformation(@RequestParam("bookId") int id, Model model, HttpServletRequest request) {
 
         Book book = bookService.getBook(id);
 

@@ -10,13 +10,13 @@ import com.example.springbootproj.entity.Task;
 import com.example.springbootproj.service.Form1Service;
 import com.example.springbootproj.utils.ReaderBookForm;
 import com.example.springbootproj.utils.TaskStatus;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.util.*;
 

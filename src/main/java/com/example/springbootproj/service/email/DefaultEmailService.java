@@ -1,7 +1,5 @@
 package com.example.springbootproj.service.email;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,6 +10,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 */
 
+import javax.mail.MessagingException;
 import java.nio.charset.StandardCharsets;
 
 @Service

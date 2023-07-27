@@ -2,7 +2,7 @@ package com.example.springbootproj.dao;
 
 import com.example.springbootproj.entity.ArchiveBooks;
 import com.example.springbootproj.entity.Book;
-import jakarta.persistence.EntityManager;
+import javax.persistence.*;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
