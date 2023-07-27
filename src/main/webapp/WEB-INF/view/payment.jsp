@@ -17,8 +17,9 @@
   <c:param name="readerId" value="${readerId}"/>
 </c:url>
 
-<input type="button" value="Оплатить"
-       onclick="window.location.href= 'showBooksReaderById'"/>
-<br><br>
+<td>
+  <input type="button" value="Оплатить"
+         onClick="window.location.href = '${showBooksReaderById}'">
+</td>
 </body>
 </html>

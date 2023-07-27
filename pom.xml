@@ -26,19 +26,44 @@
 			<version>6.1.0.Final</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+<!--
+		 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>5.4.1</version>
-		</dependency>
+		</dependency>-->
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<!--&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.security/spring-security-web &ndash;&gt;
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>6.1.2</version>
+		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>5.4.1</version>
-		</dependency>
+		</dependency>-->
+
+		<!--&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.security/spring-security-config &ndash;&gt;
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>6.1.2</version>
+		</dependency>-->
+
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
 		<dependency>
@@ -47,14 +72,23 @@
 			<version>5.4.1</version>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+		<!--&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs &ndash;&gt;
 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>6.1.2</version>
+		</dependency>-->
+
+
+		<!--
+                 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+        -->
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
@@ -67,11 +101,11 @@
 		</dependency>
 
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>

@@ -7,8 +7,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+/*
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
+*/
 
 import java.nio.charset.StandardCharsets;
 
@@ -18,7 +20,7 @@ public class DefaultEmailService implements EmailService{
     @Autowired
     public JavaMailSender emailSender;
 
-    @Autowired
+    /*@Autowired
     private SpringTemplateEngine templateEngine;
     @Override
     public void sendSimpleEmailWithAttachment(EmailContext email) throws MessagingException {
@@ -36,12 +38,18 @@ public class DefaultEmailService implements EmailService{
         mimeMessageHelper.setFrom(email.getFrom());
         mimeMessageHelper.setText(emailContent, true);
         emailSender.send(message);
+    }*/
+
+    @Override
+    public void sendSimpleEmailWithAttachment(EmailContext email) throws MessagingException {
+        return;
     }
 
     @Override
-    public void sendSimpleEmail(String toAddress, String subject, String message) {
+    public void sendSimpleEmail(String toAddress,String fromAddress, String subject, String message) {
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(fromAddress);
         simpleMailMessage.setTo(toAddress);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(message);

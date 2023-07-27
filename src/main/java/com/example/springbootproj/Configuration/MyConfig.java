@@ -9,6 +9,8 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableScheduling
@@ -18,7 +20,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @ConditionalOnProperty(
         value = "app.scheduling.enable", havingValue = "true", matchIfMissing = true
 )
-public class MyConfig {
+public class MyConfig implements WebMvcConfigurer{
     private static final int CORE_POOL_SIZE = 2;
 
     @Bean(name = "taskScheduler")
@@ -36,4 +38,10 @@ public class MyConfig {
         scheduler.initialize();
         return scheduler;
     }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+    }
+
 }

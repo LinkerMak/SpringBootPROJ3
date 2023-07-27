@@ -1,6 +1,7 @@
 package com.example.springbootproj.entity.security;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

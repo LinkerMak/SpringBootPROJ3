@@ -65,7 +65,6 @@ public class GeneratorE {
 
         List<ReaderBookForm> rbfList = new ArrayList<>();
 
-        System.out.println("1");
         List<Integer> idReaders = new ArrayList<>();
         for(Form1 form : forms) {
             if(!idReaders.contains(form.getReader_id())) {
@@ -74,7 +73,6 @@ public class GeneratorE {
 
             System.out.println(form);
         }
-        System.out.println("2");
 
         for(int idReader : idReaders) {
             Reader reader = readerDAO.getReader(idReader);
@@ -87,7 +85,6 @@ public class GeneratorE {
             System.out.println(idReader);
         }
 
-        System.out.println("3");
 
         for(int idReader : idReaders) {
             Reader reader = readerDAO.getReader(idReader);
@@ -110,15 +107,12 @@ public class GeneratorE {
             eContext.setContext(map);
             eContext.setAttachment(str);
 */
-            System.out.println("4");
-            System.out.println(str + ";" + reader.getEmail());
-            defaultEmailService.sendSimpleEmail(reader.getEmail(),"Задолженность",str);
-            //defaultEmailService.sendSimpleEmailWithAttachment(eContext);
-            System.out.println("5");
 
+            defaultEmailService.sendSimpleEmail(reader.getEmail(),"linkermak@mail.ru","Задолженность",str);
+            //defaultEmailService.sendSimpleEmailWithAttachment(eContext);
         }
 
-        System.out.println("generated is ok");
+        System.out.println("generated is ok( send email)");
     }
 
 

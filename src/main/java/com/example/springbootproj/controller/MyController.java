@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,6 +39,14 @@ public class MyController {
     @Autowired
     private ReaderService readerService;
 
+    @RequestMapping
+    public String hello() {
+        return "index";
+    }
+    @PostMapping("/login")
+    public String login() {
+        return "login";
+    }
     @RequestMapping("/allBooks")
     public String showAllBooks(Model model) {
         List<Book> books = bookService.getAllBooks();
@@ -267,6 +276,9 @@ public class MyController {
         }
         else {
             int sum = merge * 30;
+
+            archiveReadersDAO.addBookInArchive(reader,book,form);
+            form1Service.deleteBookForReader(form);
 
             model.addAttribute("sum", sum);
             model.addAttribute("readerId",rId);
