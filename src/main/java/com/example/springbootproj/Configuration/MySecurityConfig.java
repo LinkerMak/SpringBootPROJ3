@@ -34,12 +34,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
 
-/*
  @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-*/
 
 
     @Override
@@ -49,12 +47,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/allBooks").permitAll()
+                .antMatchers("/registration","/setting","/saveReader").not().fullyAuthenticated()
                 //Доступ только для пользователей с ролью Администратор
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/news").hasRole("USER")
-                //Доступ разрешен всем пользователей
-                .antMatchers("/", "/resources/**").permitAll()
+                .antMatchers("/user/**").hasRole("USER")
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()
@@ -108,10 +104,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     }
 */
 
- /*@Autowired
+ @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
-*/
 
 }

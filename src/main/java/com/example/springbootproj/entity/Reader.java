@@ -23,6 +23,11 @@ public class Reader {
     @Column(name = "number")
     private String number;
 
+    @Column(name = "user_id")
+    private int user_id;
+
+
+
   /*  @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "form",
             joinColumns = {@JoinColumn(name = "id_reader"),
@@ -31,6 +36,9 @@ public class Reader {
 
    */ public Reader() {}
 
+    public Reader(int user_id) {
+       this.user_id = user_id;
+    }
     public Reader(ArchiveReaders arReader) {
        this.email = arReader.getEmail();
        this.number = arReader.getNumber();
@@ -50,6 +58,14 @@ public class Reader {
     public void setBooks(Set<Book> books) {
         this.books = books;
     }*/
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
 
     public int getId() {
         return id;

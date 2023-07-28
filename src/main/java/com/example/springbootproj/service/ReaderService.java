@@ -14,4 +14,6 @@ public interface ReaderService {
     public Reader getReader(int id);
 
     public void deleteReader(int id);
+
+    public Integer getReaderMaxId();
 }

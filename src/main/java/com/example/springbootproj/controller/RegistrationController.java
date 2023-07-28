@@ -1,5 +1,6 @@
 package com.example.springbootproj.controller;
 
+import com.example.springbootproj.entity.Reader;
 import com.example.springbootproj.entity.security.User;
 import com.example.springbootproj.service.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
@@ -18,6 +20,20 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping("/setting")
+    public String setting(Model model) {
+        User user = userService.getMaxUser();
+        Reader reader = new Reader(Math.toIntExact(user.getId()));
+
+        System.out.println("setting:" + user);
+        model.addAttribute("reader",reader);
+        return "readerInfo";
+    }
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
@@ -40,6 +56,7 @@ public class RegistrationController {
             return "registration";
         }
 
-        return "redirect:/";
+        System.out.println("reg ok");
+        return "redirect:/setting";
     }
 }

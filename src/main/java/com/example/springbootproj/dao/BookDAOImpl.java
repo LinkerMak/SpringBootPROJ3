@@ -88,13 +88,13 @@ public class BookDAOImpl implements BookDAO{
 
     @Override
     @Transactional
-    public boolean isExists(int id) {
+    public int isExists(int id) {
         Session session = entityManager.unwrap(Session.class);
 
-        Query<Boolean> query = session.createQuery("select exists (from Book where id = :ID)",Boolean.class);
+        Query<Long> query = session.createQuery("select count(*) from Book where id = :ID",Long.class);
         query.setParameter("ID",id);
 
-        return query.getResultList().get(0);
+        return Math.toIntExact(query.getResultList().get(0));
     }
 
     @Override

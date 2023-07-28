@@ -11,6 +11,7 @@
 
   <form:hidden path="id"/>
 
+  <form:hidden path="user_id"/>
 Name <form:input path="name"/>
 <br><br>
 Email <form:input path="email"/>

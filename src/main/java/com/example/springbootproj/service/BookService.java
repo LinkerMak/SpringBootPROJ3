@@ -18,7 +18,7 @@ public interface BookService {
 
     public List<Book> getAllBooksByIds(List<Integer> ids);
 
-    public boolean isExists(int id);
+    public int isExists(int id);
 
     public Integer getBookMaxId();
 }

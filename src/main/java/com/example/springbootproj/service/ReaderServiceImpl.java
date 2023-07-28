@@ -32,7 +32,14 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
+    @Transactional
     public void deleteReader(int id) {
         readerDAO.deleteReader(id);
+    }
+
+    @Override
+    @Transactional
+    public Integer getReaderMaxId() {
+        return readerDAO.getReaderMaxId();
     }
 }

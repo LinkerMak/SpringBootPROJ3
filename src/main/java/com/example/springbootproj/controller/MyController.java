@@ -5,9 +5,11 @@ import com.example.springbootproj.dao.ArchiveBooksDAO;
 import com.example.springbootproj.dao.ArchiveReadersDAO;
 import com.example.springbootproj.dao.TaskDAO;
 import com.example.springbootproj.entity.*;
+import com.example.springbootproj.entity.security.User;
 import com.example.springbootproj.service.BookService;
 import com.example.springbootproj.service.Form1Service;
 import com.example.springbootproj.service.ReaderService;
+import com.example.springbootproj.service.security.UserService;
 import com.example.springbootproj.utils.TaskStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ import java.util.*;
 @Controller
 public class MyController {
 
+
+    @Autowired
+    private UserService userService;
     @Autowired
     private Form1Service form1Service;
     @Autowired
@@ -38,18 +43,15 @@ public class MyController {
     @Autowired
     private ReaderService readerService;
 
-    @RequestMapping("/index")
+   /* @RequestMapping("/index")
     public String hello() {
         return "hello";
-    }
-    @PostMapping("/login")
-    public String login() {
-        return "login";
-    }
-    @RequestMapping("/registration")
+    }*/
+
+    /*@RequestMapping("/registration")
     public String reg() {
         return "registration";
-    }
+    }*/
     @RequestMapping("/allBooks")
     public String showAllBooks(Model model) {
         List<Book> books = bookService.getAllBooks();
@@ -71,7 +73,7 @@ public class MyController {
     public String saveBook(@ModelAttribute("book")Book book) {
         System.out.println(book);
         System.out.println(bookService.isExists(book.getId()));
-        if (bookService.isExists(book.getId()) == false) {
+        if (bookService.isExists(book.getId()) == 0) {
             bookService.saveBook(book);
             Book bookMax = bookService.getBook(bookService.getBookMaxId());
             archiveBooksDAO.addBookInArchive(bookMax);
@@ -133,6 +135,14 @@ public class MyController {
     @RequestMapping("/saveReader")
     public String saveReader(@ModelAttribute("reader")Reader reader) {
         readerService.saveReader(reader);
+
+        Integer i = readerService.getReaderMaxId();
+        System.out.println(i);
+        User user = userService.getUserById((long) reader.getUser_id());
+        System.out.println(user);
+        user.setReader_id(i);
+        System.out.println(user.getReader_id());
+        System.out.println(userService.saveUser(user));
 
         return "redirect:/readers";
     }
@@ -227,6 +237,27 @@ public class MyController {
         model.addAttribute("reader",reader);
         return "allBooksById";
     }
+    @RequestMapping("/showBooksReaderByNameUser")
+    public String showBooksByReaderNameUser(@RequestParam("nameUser")String nameUser, Model model) {
+
+        User user = (User) userService.loadUserByUsername(nameUser);
+
+        int id = user.getReader_id();
+        List<Integer> booksIds = form1Service.getIdsByReader(id);
+        List<Book> books = bookService.getAllBooksByIds(booksIds);
+        Reader reader = readerService.getReader(id);
+
+        List<BookForm> bf = new ArrayList<>();
+        for(Book book : books) {
+            System.out.println(book);
+            bf.add(new BookForm(book, form1Service.getForm(book,reader)));
+        }
+
+        model.addAttribute("forms" ,bf);
+        model.addAttribute("books",books);
+        model.addAttribute("reader",reader);
+        return "allBooksById";
+    }
 
     @RequestMapping("/addNewBookForReader")
     public String addNewBookForReader(@RequestParam("readerId") int id,Model model) {
@@ -241,6 +272,7 @@ public class MyController {
     @RequestMapping("/chooseBook")
     public String chooseBook(@RequestParam("bookId") int id,@RequestParam("readerId") int rid, Model model) {
 
+        System.out.println("1");
         Book book = bookService.getBook(id);
         Reader reader = readerService.getReader(rid);
 

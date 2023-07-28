@@ -16,4 +16,5 @@ public interface ReaderDAO {
 
     public void deleteReader(int id);
 
+    public Integer getReaderMaxId();
 }

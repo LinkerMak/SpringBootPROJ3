@@ -58,4 +58,14 @@ public class ReaderDAOImpl implements ReaderDAO{
 
         query.executeUpdate();
     }
+
+    @Override
+    @Transactional
+    public Integer getReaderMaxId() {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Integer> query = session.createQuery("select max(id) from Reader",Integer.class);
+
+        return query.getResultList().get(0);
+    }
 }

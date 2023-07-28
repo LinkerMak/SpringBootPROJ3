@@ -24,7 +24,17 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @Column(name = "reader_id")
+    private int reader_id;
     public User() {
+    }
+
+    public int getReader_id() {
+        return reader_id;
+    }
+
+    public void setReader_id(int reader_id) {
+        this.reader_id = reader_id;
     }
 
     public Long getId() {
@@ -88,6 +98,18 @@ public class User implements UserDetails {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordConfirm='" + passwordConfirm + '\'' +
+                ", roles=" + roles +
+                ", reader_id=" + reader_id +
+                '}';
     }
 
     public void setRoles(Set<Role> roles) {

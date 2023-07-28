@@ -24,8 +24,8 @@ public class UserService implements UserDetailsService {
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
-    /*@Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;*/
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -51,13 +51,12 @@ public class UserService implements UserDetailsService {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
         if (userFromDB != null) {
-            return false;
+            userRepository.updateUserById(user.getReader_id(),user.getId());
+            return true;
         }
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-/*
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-*/
         userRepository.save(user);
         return true;
     }
@@ -73,5 +72,13 @@ public class UserService implements UserDetailsService {
     public List<User> usergtList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
+    }
+
+    public User getMaxUser() {
+        return userRepository.getMaxId();
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.getUserById(id);
     }
 }

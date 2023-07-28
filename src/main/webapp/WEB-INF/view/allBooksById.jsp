@@ -18,7 +18,6 @@
     <th>price</th>
     <th> Date Take</th>
     <th> Date Return</th>
-    <th> Date Fact Return</th>
     <th>Merge</th>
   </tr>
 
@@ -36,7 +35,6 @@
       <td>${buf.book.price}</td>
       <td>${buf.form.date_take}</td>
       <td>${buf.form.date_return}</td>
-      <td>${buf.form.date_fact_return}</td>
       <td>${buf.form.merge}</td>
 
       <td>

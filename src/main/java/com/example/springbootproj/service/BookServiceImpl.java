@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     @Transactional
-    public boolean isExists(int id) {
+    public int isExists(int id) {
         return bookDAO.isExists(id);
     }
 
