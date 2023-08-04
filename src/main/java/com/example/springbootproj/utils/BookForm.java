@@ -1,4 +1,7 @@
-package com.example.springbootproj.entity;
+package com.example.springbootproj.utils;
+
+import com.example.springbootproj.entity.Book;
+import com.example.springbootproj.entity.Form1;
 
 public class BookForm {
 

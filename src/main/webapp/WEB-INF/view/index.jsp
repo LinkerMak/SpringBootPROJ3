@@ -40,11 +40,13 @@
       <input type="button" value="Все книги"
              onclick="window.location.href= 'admin/allBooks'"/>
       <br><br>
+
+      <h4><a href="/admin">Пользователи (только админ)</a></h4>
     </security:authorize>
 
   </sec:authorize>
-  <h4><a href="/news">Новости (только пользователь)</a></h4>
-  <h4><a href="/admin">Пользователи (только админ)</a></h4>
+
+
 </div>
 </body>
 </html>

@@ -14,8 +14,10 @@
     <form:hidden path="status"/>
 
 Date From <form:input path="dateFrom"/>
+<form:errors path="dateFrom"/>
 <br><br>
 Date To <form:input path="dateTo"/>
+    <form:errors path="dateTo"/>
 <br><br>
 
 <input type="submit" value="OK">

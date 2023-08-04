@@ -72,7 +72,7 @@
        onclick="window.location.href= 'addNewReader'"/>
 <br><br>
 
-<input type="button" value="Книги"
+<input type="button" value="Все Книги"
        onclick="window.location.href= 'allBooks'"/>
 <br><br>
 

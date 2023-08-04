@@ -15,8 +15,7 @@
         <th>Name</th>
         <th>Author</th>
         <th>pages</th>
-        <th>price</th>
-        <th>status</th>
+        <th>price</th
     </tr>
 
     <c:forEach var="book" items="${allBooks}">
@@ -38,7 +37,6 @@
             <td>${book.author}</td>
             <td>${book.pages}</td>
             <td>${book.price}</td>
-            <td>${book.status}</td>
 
             <td>
                 <input type="button" value="Update"

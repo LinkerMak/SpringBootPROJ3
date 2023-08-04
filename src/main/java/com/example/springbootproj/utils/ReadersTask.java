@@ -1,4 +1,6 @@
-package com.example.springbootproj.entity;
+package com.example.springbootproj.utils;
+
+import com.example.springbootproj.entity.Reader;
 
 import java.util.List;
 

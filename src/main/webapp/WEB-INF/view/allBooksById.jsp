@@ -55,7 +55,7 @@
 </c:url>
 
 
-<input type="button" value="Книги"
+<input type="button" value="Выбрать книгу"
        onClick="window.location.href = '${addNewBookForReader}'">
 
 <br><br>

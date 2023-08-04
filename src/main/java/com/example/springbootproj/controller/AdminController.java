@@ -9,13 +9,19 @@ import com.example.springbootproj.service.BookService;
 import com.example.springbootproj.service.Form1Service;
 import com.example.springbootproj.service.ReaderService;
 import com.example.springbootproj.service.security.UserService;
+import com.example.springbootproj.utils.ArchiveBookReader;
+import com.example.springbootproj.utils.BookForm;
+import com.example.springbootproj.utils.ReadersTask;
 import com.example.springbootproj.utils.TaskStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -376,7 +382,7 @@ public class AdminController {
         return "taskInfo";
     }
     @RequestMapping("/admin/addToTask")
-    public String addToTask(@ModelAttribute("task") Task tusk)  {
+    public String addToTask(@Valid @ModelAttribute("task") Task tusk, BindingResult bindingResult)  {
 
         /*char [] arr = str.toCharArray();
         System.out.println(arr);
@@ -414,7 +420,13 @@ public class AdminController {
                 year = Integer.parseInt(st.toString());
             }
         }*/
-        taskDAO.saveTask(tusk);
-        return "redirect:/admin/allBooks";
+
+        if(bindingResult.hasErrors()) {
+            return "taskInfo";
+        }
+        else {
+            taskDAO.saveTask(tusk);
+            return "redirect:/admin/allBooks";
+        }
     }
 }

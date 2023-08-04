@@ -1,6 +1,8 @@
 package com.example.springbootproj.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+
 import org.bouncycastle.crypto.digests.GeneralDigest;
 
 import java.io.Serializable;
@@ -22,9 +24,11 @@ public class Task implements Serializable {
     @Column(name = "status")
     private String status;
 
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "please use pattern YYYY-MM-DD")
     @Column(name = "date_from")
     private String dateFrom;
 
+    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "please use pattern YYYY-MM-DD")
     @Column(name = "date_to")
     private String dateTo;
 

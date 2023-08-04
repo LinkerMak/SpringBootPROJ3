@@ -1,4 +1,7 @@
-package com.example.springbootproj.entity;
+package com.example.springbootproj.utils;
+
+import com.example.springbootproj.entity.ArchiveBooks;
+import com.example.springbootproj.entity.ArchiveReaders;
 
 public class ArchiveBookReader {
 
