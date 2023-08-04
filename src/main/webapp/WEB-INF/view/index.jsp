@@ -38,7 +38,7 @@
 
     <security:authorize access="hasAnyRole('ADMIN')">
       <input type="button" value="Все книги"
-             onclick="window.location.href= 'allBooks'"/>
+             onclick="window.location.href= 'admin/allBooks'"/>
       <br><br>
     </security:authorize>
 

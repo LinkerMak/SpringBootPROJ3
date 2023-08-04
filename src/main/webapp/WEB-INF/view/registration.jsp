@@ -13,20 +13,30 @@
   <form:form method="POST" modelAttribute="userForm">
     <h2>Регистрация</h2>
     <div>
-      <form:input type="text" path="username" placeholder="Username"
+      <form:input type="text" path="user.username" placeholder="Username"
                   autofocus="true"></form:input>
-      <form:errors path="username"></form:errors>
+      <form:errors path="user.username"></form:errors>
         ${usernameError}
     </div>
     <div>
-      <form:input type="password" path="password" placeholder="Password"></form:input>
+      <form:input type="password" path="user.password" placeholder="Password"></form:input>
     </div>
     <div>
-      <form:input type="password" path="passwordConfirm"
+      <form:input type="password" path="user.passwordConfirm"
                   placeholder="Confirm your password"></form:input>
-      <form:errors path="password"></form:errors>
+      <form:errors path="user.password"></form:errors>
         ${passwordError}
     </div>
+    <div>
+    Name <form:input path="reader.name"/>
+      <div/>
+      <div>
+    Email <form:input path="reader.email"/>
+        <div/>
+
+        <div>
+    Number <form:input path="reader.number"/>
+          <div/>
     <button type="submit">Зарегистрироваться</button>
   </form:form>
   <a href="/">Главная</a>
